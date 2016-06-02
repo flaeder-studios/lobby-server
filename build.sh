@@ -1,1 +1,1 @@
-docker build -t multipong-server .
+docker build -t flaeder-lobby .

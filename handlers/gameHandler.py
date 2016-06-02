@@ -2,23 +2,17 @@
 # -*- coding: utf-8 -*-
 
 import cherrypy
-from mpong.masterGameBuilder import masterGame
 
 
 class GameHandler:
 
     exposed = True
 
-
     def getAllGames(self):
-        games = cherrypy.engine.publish('mpong-get-all-games') #.pop()
-
-        return {'games': masterGame.getAllGameData()}
+        return {'games': []}
 
     def getGame(self, gameID):
-        game = cherrypy.engine.publish('mpong-get-game', gameID) #.pop()
-
-        return {'games': [ masterGame.getGameData(gameID)]}
+        return {'games': []}
 
     @cherrypy.tools.json_out()
     def GET(self, gameID=None):
@@ -59,8 +53,5 @@ class GameHandler:
     def DELETE(self, gameID):
         if not cherrypy.session.get('name'):
             raise cherrypy.HTTPError(401, 'name not set')
-        
-        #removedGame = cherrypy.engine.publish('mpong-remove-game', gameID) #.pop()
-        removedGame = masterGame.deleteGame(gameID)
-        return { 'games': [removedGame] }
 
+        return {'games': []}

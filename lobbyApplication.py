@@ -1,6 +1,6 @@
 import handlers
 import cherrypy
-
+import os
 
 def handleError():
     cherrypy.response.status = 500
@@ -10,12 +10,7 @@ def handleError():
 class Root:
     _cp_config = {'request.error_response': handleError}
 
-
 root = Root()
-
-root.game = Root()
-root.game.state = handlers.GameState()
-root.game.paddle = handlers.PaddleHandler()
 
 root.lobby = Root()
 root.lobby.game = handlers.GameHandler()
